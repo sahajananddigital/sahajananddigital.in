@@ -2,7 +2,7 @@
 title: "Privacy & Policy"
 subtitle: ""
 # meta description
-description: "This is meta description"
+description: "Privacy policy for website"
 draft: false
 ---
 

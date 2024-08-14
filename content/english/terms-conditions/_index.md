@@ -2,7 +2,7 @@
 title: "Terms of Service"
 subtitle: ""
 # meta description
-description: "This is meta description"
+description: "Terms of Service of Sahajanand Digital"
 draft: false
 ---
 

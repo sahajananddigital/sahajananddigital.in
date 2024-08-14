@@ -2,7 +2,7 @@
 title: "Services"
 subtitle: ""
 # meta description
-description: "This is meta description"
+description: "Services that Sahajanand Digital provides"
 draft: false
 
 basic:
