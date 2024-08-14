@@ -1,0 +1,13 @@
+############################# English ############################
+[en]
+languageName = "En"
+title = "Sahajanand Digital"
+contentDir = "content/english" # content/english
+weight = 1
+########### footer content ##########
+footer_menu_left = "Company"
+footer_menu_middle = "Product"
+footer_menu_right = "Support"
+footer_content = "**We at Sahajanand Digital provide effective and efficient solutions for your requirements.**"
+# copyright
+copyright = "Developed By [Sahajanand Digital](https://sahajananddigital.in/contact) &copy; since 2022"

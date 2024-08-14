@@ -1,0 +1,58 @@
+{{ define "main" }}
+
+{{ partial "page-header.html" . }}
+<section class="section bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <form action="{{ site.Params.contact_form_action | safeURL }}" class="contact_form_main" method="POST">
+          <input type="text" class="form-control mb-3" id="name" name="name" placeholder="{{ i18n `yourname` }}" required="required">
+          <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="{{ i18n `youremail` }}" required="required">
+          <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="{{ i18n `subject` }}" minlength="20" required="required">
+          <textarea name="message" id="message" class="form-control mb-3" placeholder="{{ i18n `yourmessage` }}" minlength="50" required="required"></textarea>
+          <button type="submit" value="send" class="btn btn-primary">{{ i18n `sendnow` }}</button>
+        </form>
+      </div>
+      
+      <div class="col-lg-5 content">
+        {{ .Content }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+var contact_form_main = document.querySelector('.contact_form_main');
+contact_form_main.addEventListener('submit', function(e){
+  e.preventDefault();
+  let formData = new FormData(contact_form_main);
+  php_email_form_submit( contact_form_main, contact_form_main.action, formData );
+});
+
+function php_email_form_submit(thisForm, action, formData) {
+  var APPSSCRIPT_URL = 
+  fetch(action, {
+    method: 'POST',
+    //body: JSON.stringify(Object.fromEntries(formData )),
+    body: formData,
+    //headers: {'Content-type': 'application/x-www-form-urlencoded'}
+  }).then(response => response.json())
+  .then(response => {
+    if( response.ok ) {
+      alert(response.message);
+    } else {
+      throw new Error(`${response.status} ${response.statusText} ${response.url}`); 
+    }
+  })
+  .catch((error) => {
+    displayError(thisForm, error);
+  });
+}
+
+function displayError(thisForm, error) {
+  alert(error)
+}
+
+</script>
+
+{{ end }}

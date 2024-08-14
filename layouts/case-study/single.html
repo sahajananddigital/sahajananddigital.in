@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="img-fluid w-100 rounded mb-4">
+        <h2 class="mb-4">{{ .Title }}</h2>
+        <div class="content">{{.Content}}</div>
+        
+        <!-- comments -->
+        {{ if site.DisqusShortname }}
+        <div class="mt-5">
+          {{ template "_internal/disqus.html" . }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{{ end }}
