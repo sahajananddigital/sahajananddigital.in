@@ -6,7 +6,7 @@ description = "Sahajanad Digital is one the responsible IT company in the india"
 author = "Themefisher"
 image = "images/logo.png" # this image will be used as fallback if a page has no image of its own
 # contact form action
-contact_form_action = "https://script.google.com/macros/s/AKfycbxRyqtXEayRfRSv3R84WuY1Eh-FVlS2VLcXybdATitnY38m6LB89anbMdE8IcHGyvlq/exec" # contact form works with https://formspree.io
+contact_form_action = "https://script.google.com/macros/s/AKfycbwZFuh8yAfKjYRdeDAP2yRT9gJUos979QdaZ_QxlUTmLOBkfKkoJv8TobjJPu-zS-0w/exec" # contact form works with https://formspree.io
 
 # Type of pages to be rendered with a blog view
 blogCategoryType = "category"
