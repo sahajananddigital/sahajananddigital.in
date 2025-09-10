@@ -12,5 +12,5 @@ Your one stop to all your IT requirements whether it’s a Web Design or IT Cons
 
 * **Phone: +91 81605 35181** 
 * **Mail: hello@sahajananddigital.in**
-* **Address: 318, Blueberry Complex, Opp. Ganesh Rivera, Nr.Gurukul Circle, Nikol, Ahmedabad, Gujarat, India - 382350**
+* **Address: 505, Blueberry Complex, Opp. Ganesh Rivera, Nr.Gurukul Circle, Nikol, Ahmedabad, Gujarat, India - 382350**
 <!-- * **Address: 360 Main rd, Rio, Brazil** -->
