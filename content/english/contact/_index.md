@@ -10,7 +10,7 @@ draft: false
 ### Why you should contact us!
 Your one stop to all your IT requirements whether it’s a Web Design or IT Consultancy, Digital Marketing or Mobile App Development. Contact Us Now!.
 
-* **Phone: +91 81605 35181** 
+* **Phone: +91 99786 73330** 
 * **Mail: hello@sahajananddigital.in**
 * **Address: 505, Blueberry Complex, Opp. Ganesh Rivera, Nr.Gurukul Circle, Nikol, Ahmedabad, Gujarat, India - 382350**
 <!-- * **Address: 360 Main rd, Rio, Brazil** -->
