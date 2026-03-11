@@ -5,52 +5,49 @@ slug: "aquapex-ro-ahmedabad-webdevelopment-case-study"
 # post image
 image: "/images/case-study/aquapexro-home-page.png"
 # post type (regular/featured)
-type: "featured"
+type: "regular"
 # meta description
-description: "Struggling to grow your water filtration business online? See how Aquapex RO increased sales and brand awareness with a new website by Sahajanand Digital."
+description: "This is meta description"
 # post draft
 draft: false
 ---
 
 ![Aquapex Homepage](/images/case-study/aquapexro-home-page.png)
 
-## Improve online presence with a new website: Aquapex RO Case Study
-
 ### Client Introduction
-Aquapax RO is a prominent manufacturer of water purifier systems based in Gujarat. With a commitment to providing clean and safe drinking water, Aquapax RO is a trusted name in the industry.
+Aquapax RO. The Leading Manufacturer of Water Purifier Systems in Gujarat.
 
 ### Analysis
-Our team thoroughly analyzed the requirements provided by Aquapax RO. The project scope included designing the Home page, Contact page, and integrating comprehensive services such as UI design, Logo Design, and Content Marketing.
+Our team has gone through the all requirement given by client. From Home page to contact page. They want to include all packages from UI design, Logo Design, Content Marketing etc...
 
 ### Work Done
-We meticulously planned and executed the website development to meet the client's specific needs. Here's a detailed breakdown of the work done:
+We have analyse the website work and done the planning according to website requirement.
 
-### Strategy and Thinking
-Given the client's preference for a static website that requires minimal updates, we opted to develop the site using HTML. This approach ensures stability and ease of maintenance. Despite being a static site, we integrated a dynamic contact form using Google Services.
+### Thinking 
+Ideally we make wordpress website. but this time client does not want site that change quite often.
 
-### Hosting Solutions
-To ensure the website runs smoothly under all conditions, we utilized a combination of three robust services:
+We have carefully looked on the team suggestions and decided to make website in the HTML only without dynamic features.Though we have contact from is dynamic which we have done with google Service.
 
-1. **Cloudflare**
-   - **Business Email**: Provided professional email services.
-   - **Data Centers**: Located near user locations for fast loading times.
-   - **World-Class Security**: Ensured the highest level of website security.
+### Hosting
+Since this is the static website we have used three services to run website smoothly with any situations
+- Cloudflare
+- Netlify
+- Google Gsuite services
 
-2. **Netlify**
-   - **Website Hosting**: Hosted the static site with Netlify.
-   - **Automated Deployment**: Streamlined updates and deployments.
-   - **Advanced Caching**: Provided an additional layer of caching for improved performance.
+we also provided email like `hello@sahajananddigital.in` without any cost. 
 
-3. **Google G Suite Services**
-   - **Dynamic Contact Form**: Implemented using Google Apps Script to handle form inquiries efficiently.
-   - **Professional Email**: Set up custom email addresses like hello@sahajananddigital.in at no additional cost.
+### Benefit
+- Client get total advantages of the configured service. 
 
-### Benefits
-Aquapax RO gained several advantages from our carefully configured services:
+**Cloudflare**
+- Provided the business email
+- Data center near user location
+- Worldclass Security
 
-- **Enhanced User Experience**: Fast loading times and reliable performance due to strategic hosting choices.
-- **Security and Reliability**: Robust security measures and high uptime from Cloudflare and Netlify.
-- **Efficient Communication**: Seamless email services and dynamic contact form integration.
+**Netlify**
+- Hosted website throug this service
+- Provides automated deployment
+- Also provides second level of the caching at their own server
 
-### Conclusion
-The collaboration with Aquapax RO resulted in a stable, high-performance static website that meets all their business needs without the complexity of frequent updates. By leveraging Cloudflare, Netlify, and Google G Suite Services, we ensured that Aquapax RO's online presence is both powerful and secure.
+**Google Gsuite services**
+- Added appscript to work with the contact form enquiry
