@@ -36,6 +36,15 @@ async function runBrowser(commands) {
 async function main() {
   console.log('🚀 Starting Site Verification Suite...');
 
+  // Check if agent-browser is available
+  try {
+    execSync('which agent-browser', { stdio: 'ignore' });
+  } catch (e) {
+    console.warn('⚠️ agent-browser not found in PATH. Skipping verification tests.');
+    console.log('This is normal in CI environments (like Netlify) where the local verification tool is not installed.');
+    process.exit(0);
+  }
+
   const isRunning = await checkServer();
   let serverProcess;
 
