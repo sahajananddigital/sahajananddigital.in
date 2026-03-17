@@ -9,6 +9,7 @@
   background-color: var(--bg-light);
   padding: 40px;
   border-radius: 24px;
+  overflow: hidden;
 }
 
 .list {
@@ -19,6 +20,7 @@
 
 .list li {
   font-size: 1.125rem;
+  word-break: break-word;
 }
 
 .list strong {
@@ -50,5 +52,11 @@
   
   .formWrapper {
     padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .info {
+    padding: 24px;
   }
 }

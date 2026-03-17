@@ -19,7 +19,7 @@ export function getPosts(type: string) {
 
       return {
         slug: data.slug || filenameSlug,
-        ...(data as { title: string; date: string; image: string; description: string }),
+        ...(data as { title: string; date: string; image: string; description: string; category?: string }),
         content,
       };
     });

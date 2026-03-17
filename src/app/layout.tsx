@@ -4,15 +4,22 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Script from "next/script";
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://sahajananddigital.in"),
   title: "Sahajanand Digital | Best Web Development Company in Ahmedabad",
   description: "Sahajanad Digital is one the responsible IT company in the india, providing custom web development, mobile apps, and IT solutions.",
-  keywords: "web development, ahmedabad, IT services, sahajanand digital, mobile app development",
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
+  keywords: "web development, ahmedabad, IT services, sahajananddigital, mobile app development",
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
   },
   openGraph: {
     title: "Sahajanand Digital",

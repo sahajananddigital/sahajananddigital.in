@@ -24,6 +24,12 @@
   margin: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 body {
   font-family: var(--primary-font);
   color: var(--text-color);
@@ -31,7 +37,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {

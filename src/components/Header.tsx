@@ -50,17 +50,10 @@ const Header = () => {
             />
           </Link>
 
-          <button 
-            className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
-            onClick={toggleMenu}
-            aria-label="Toggle Menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-
           <ul className={`${styles.menu} ${isMenuOpen ? styles.menuOpen : ''}`}>
+            <button className={styles.closeButton} onClick={closeMenu} aria-label="Close Menu">
+              <i className="fas fa-times"></i>
+            </button>
             {menuItems.map((item) => (
               <li key={item.name} className={styles.menuItem}>
                 <Link 
@@ -79,15 +72,26 @@ const Header = () => {
             </li>
           </ul>
 
-          <div className={styles.actions}>
-            <Link href="/contact" className="btn btn-sm btn-primary">
-              Get Started
-            </Link>
+          <div className={styles.navActions}>
+            <button 
+              className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+            >
+              <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+            </button>
+
+            <div className={styles.actions}>
+              <Link href="/contact" className="btn btn-sm btn-primary">
+                Get Started
+              </Link>
+            </div>
           </div>
         </nav>
       </div>
     </header>
   );
+
 };
 
 export default Header;
