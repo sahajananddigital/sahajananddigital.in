@@ -1,6 +1,9 @@
 import CTA from "@/components/CTA";
 import styles from "./services.module.css";
 import Link from "next/link";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 export const metadata = {
   title: "Premium IT Services | Sahajanand Digital",
@@ -27,6 +30,11 @@ const servicePlans = [
 ];
 
 export default function ServicesPage() {
+  const filePath = path.join(process.cwd(), "content/english/_index.md");
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const { data } = matter(fileContents);
+  const { call_to_action } = data;
+
   return (
     <>
       <div className="section bg-gradient">
@@ -55,7 +63,12 @@ export default function ServicesPage() {
           </div>
         </div>
       </div>
-      <CTA />
+      <CTA 
+        title={call_to_action.title} 
+        content={call_to_action.content} 
+        button={call_to_action.button} 
+        image={call_to_action.image} 
+      />
     </>
   );
 }
