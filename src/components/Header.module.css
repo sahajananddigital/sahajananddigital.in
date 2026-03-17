@@ -1,0 +1,144 @@
+.header {
+  padding: 1.25rem 0;
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.menuItem {
+  list-style: none;
+}
+
+.menuLink {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text-color-dark);
+}
+
+.menuLink:hover {
+  color: var(--primary-color);
+}
+
+.actions {
+  display: flex;
+}
+
+.mobileActions {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+  font-size: 1.5rem;
+  color: var(--text-color-dark);
+  transition: color 0.3s ease;
+}
+
+.hamburger:hover {
+  color: var(--primary-color);
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.closeButton {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .header {
+    backdrop-filter: none; /* Avoid new stacking context on mobile */
+  }
+
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .closeButton {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 1.75rem;
+    color: var(--text-color-dark);
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--white);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    padding: 2rem;
+    margin: 0;
+    display: none;
+  }
+
+  .menuOpen {
+    display: flex !important;
+  }
+
+  .menuLink {
+    font-size: 1.25rem;
+  }
+
+  .actions {
+    display: none;
+  }
+
+  .mobileActions {
+    display: block;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .mobileActions :global(.btn) {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    width: 100%;
+  }
+}

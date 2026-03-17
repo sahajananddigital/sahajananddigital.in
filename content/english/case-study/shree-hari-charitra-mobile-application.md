@@ -1,36 +1,40 @@
 ---
-title: "Case Study: Shree Hari Charitra Mobile Application"
-client: "Shree Hari Charitra"
-platform: "sahajananddigital.in"
-date: "2026-03-11"
-categories: ["Mobile App Development", "React Native", "WordPress API Integration"]
-# post image
-image: "images/screenshot.svg" # Add project image here (e.g., images/case-study/shree-hari-charitra.png)
-# post type (regular/featured)
+title: "Shree Hari Charitra: A Divine Cross-Platform Mobile Experience"
+date: 2026-03-11
+slug: "shree-hari-charitra-mobile-application"
+image: "/images/case-study/shc-website.png"
+category: "Mobile App Development"
 type: "featured"
-# post draft
+description: "Learn how we designed and developed a high-performance, cross-platform mobile application for Shree Hari Charitra using React Native and Headless WordPress."
 draft: false
 ---
 
-# Shree Hari Charitra: A Divine Reading Experience
+**Shree Hari Charitra** is a modern, cross-platform mobile application designed to bring sacred stories and divine pastimes (Charitras) of Bhagwan Shree Swaminarayan to devotees worldwide. Built with an emphasis on serene user experience, accessibility, and offline capabilities, the app serves as a digital sanctuary for daily spiritual reading.
 
-## Overview
-
-**Shree Hari Charitra** is a modern, cross-platform mobile application designed to bring the sacred stories and divine pastimes (Charitras) of Bhagwan Shree Swaminarayan to devotees worldwide. Built with an emphasis on a serene user experience, accessibility, and offline capabilities, the app serves as a digital sanctuary for daily spiritual reading.
+### Project Links
+- **Official Website:** [shriharicharitra.com](https://shriharicharitra.com/)
+- **Google Play Store:** [Download for Android](https://play.google.com/store/apps/details?id=com.shc)
+- **Apple App Store:** [Download for iOS](https://apps.apple.com/in/app/shree-hari-charitra/id6469516380)
 
 ## The Challenge
-
-The client required a mobile application that could seamlessly interface with their existing vast repository of spiritual texts hosted on a WordPress platform. The key challenges included:
-
-1.  **Seamless Content Delivery:** Fetching and displaying rich text content (including complex Gujarati scripts) smoothly on mobile devices without layout breaking or text clipping.
-2.  **User Engagement:** Encouraging daily reading habits through gamification (streaks, reading time tracking) and personalization (bookmarks, profile management).
-3.  **Community Contribution:** Allowing users to actively contribute to the growing library of stories.
-4.  **Performance & Reliability:** Ensuring the app remains fast and responsive, utilizing intelligent caching to minimize server load and provide a smooth experience even on slow networks.
-5.  **Secure Authentication:** Implementing a secure, token-based authentication system directly integrated with the WordPress backend.
+The client required a mobile solution that could seamlessly interface with their vast repository of spiritual texts hosted on WordPress. Key challenges included:
+1. **Gujarati Script Rendering:** Displaying complex scripts without layout breaking or clipping.
+2. **Engagement & Personalization:** Implementing streaks, reading time tracking, and bookmarks to encourage daily habits.
+3. **Performance on Slow Networks:** Ensuring fast access through intelligent local caching.
+4. **Secure Backend Integration:** Building a secure, token-based bridge between React Native and WordPress.
 
 ## Our Approach & Solution
 
 We architected a robust solution leveraging **React Native (Expo)** for the mobile frontend and customized **WordPress REST API** endpoints for the backend, ensuring a maintainable and scalable ecosystem.
+
+### App Store Presence
+We managed the entire deployment process, ensuring that the application meets the high standards of both major app stores.
+
+**Google Play Store**
+![Google Play Store](/images/case-study/shc-playstore.png)
+
+**Apple App Store**
+![Apple App Store](/images/case-study/shc-appstore.png)
 
 ### 1. Technology Stack
 *   **Frontend:** React Native, Expo, React Navigation (Expo Router)
