@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sahajananddigital.in
+
+# Sitemaps
+Sitemap: https://sahajananddigital.in/sitemap.xml

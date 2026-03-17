@@ -1,0 +1,142 @@
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.date {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.title {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  font-weight: 800;
+  color: var(--text-color-dark);
+}
+
+.imageWrapper {
+  margin-top: 50px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.content {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-color);
+}
+
+.content h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color-dark);
+}
+
+.content h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-color-dark);
+}
+
+.content p {
+  margin-bottom: 1.5rem;
+}
+
+.content ul, .content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 25px;
+}
+
+.content li {
+  margin-bottom: 0.75rem;
+}
+
+/* Ensure images in MDX stay inside the container */
+.content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  margin: 2.5rem 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  display: block;
+}
+
+.content blockquote {
+  border-left: 4px solid var(--primary-color);
+  padding: 1.5rem 2rem;
+  margin: 2.5rem 0;
+  background: var(--bg-light);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--text-color-dark);
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 2.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.25rem;
+  }
+  
+  .content {
+    font-size: 1.05rem;
+  }
+  
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .imageWrapper {
+    margin-top: 30px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .content h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .content h3 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .content blockquote {
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+  }
+}
