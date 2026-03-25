@@ -18,12 +18,16 @@ export default function ContactPage() {
             
             <div className={styles.infoSummary}>
               <div className={styles.infoItem}>
-                <strong>Phone</strong>
-                <span>+91 99786 73330</span>
+                <strong>Chat</strong>
+                <span><a href="https://tawk.to/sahajananddigital" target="_blank" rel="noopener noreferrer">Click Here for Chat Support</a></span>
               </div>
               <div className={styles.infoItem}>
                 <strong>Mail</strong>
                 <span>hello@sahajananddigital.in</span>
+              </div>
+              <div className={styles.infoItem}>
+                <strong>Support Email</strong>
+                <span>tickets@sahajanand-digital-main.p.tawk.email</span>
               </div>
               <div className={styles.infoItem}>
                 <strong>Location</strong>
