@@ -18,12 +18,16 @@ export default function ContactPage() {
             
             <div className={styles.infoSummary}>
               <div className={styles.infoItem}>
-                <strong>Phone</strong>
-                <span>+91 99786 73330</span>
-              </div>
-              <div className={styles.infoItem}>
                 <strong>Mail</strong>
                 <span>hello@sahajananddigital.in</span>
+              </div>
+              <div className={styles.infoItem}>
+                <strong>Support Email</strong>
+                <span>tickets@sahajanand-digital-main.p.tawk.email</span>
+              </div>
+              <div className={styles.infoItem}>
+                <strong>Whatsapp Phone</strong>
+                <span><a href="https://wa.me/918160535180" target="_blank" rel="noopener noreferrer">+91 8160535180</a></span>
               </div>
               <div className={styles.infoItem}>
                 <strong>Location</strong>
