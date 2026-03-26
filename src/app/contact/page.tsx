@@ -27,7 +27,7 @@ export default function ContactPage() {
               </div>
               <div className={styles.infoItem}>
                 <strong>Whatsapp Phone</strong>
-                <span><a href="https://wa.me/918160535180" target="_blank" rel="noopener noreferrer">+91 8160535180</a></span>
+                <span><a href="https://wa.me/918160535181" target="_blank" rel="noopener noreferrer">+91 8160535181</a></span>
               </div>
               <div className={styles.infoItem}>
                 <strong>Location</strong>
