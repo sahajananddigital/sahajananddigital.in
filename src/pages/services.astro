@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTA from '../components/CTA.astro';
+import styles from './services/services.module.css';
+import * as indexPage from '../content/pages/_index.md';
+
+const { call_to_action } = indexPage.frontmatter;
+
+const servicePlans = [
+  {
+    name: "Custom ERP & CRM Solutions",
+    info: "Streamline your business operations with highly scalable, tailor-made enterprise software.",
+    services: ["ERP Architecture & Setup", "Workflow Automation", "Legacy System Migration", "Cloud-Based CRM"],
+  },
+  {
+    name: "Full-Stack Web Development",
+    info: "High-performance, SEO-optimized web applications built with modern frameworks.",
+    services: ["Bespoke UI/UX Design", "Next.js & React Apps", "E-Commerce Platforms", "Custom API Integrations"],
+    featured: true,
+  },
+  {
+    name: "Native & Cross-Platform Mobile Apps",
+    info: "Engaging, user-centric mobile experiences engineered for iOS and Android.",
+    services: ["React Native & Flutter", "Performance Optimization", "Secure Authentication", "App Store Deployment"],
+  },
+];
+---
+
+<Layout title="Premium IT Services | Sahajanand Digital" description="Explore our premium IT services including custom ERP/CRM development, full-stack web applications, and native mobile app development.">
+  <div class="section bg-gradient">
+    <div class="container">
+      <div class="text-center mb-12 max-w-3xl mx-auto">
+        <h1>Our Expertise</h1>
+        <p class="text-lg">We deliver tailored IT solutions designed to accelerate your business growth and digital transformation.</p>
+      </div>
+      <div class={styles.grid}>
+        {servicePlans.map((plan) => (
+          <div class={`${styles.card} ${plan.featured ? styles.featured : ''}`}>
+            <h3 class={styles.name}>{plan.name}</h3>
+            <p class={styles.info}>{plan.info}</p>
+            <ul class={styles.list}>
+              {plan.services.map((service) => (
+                <li>
+                  <i class="fas fa-check-circle"></i> {service}
+                </li>
+              ))}
+            </ul>
+            <a href="/contact" class={`btn ${plan.featured ? 'btn-primary' : 'btn-outline'} ${styles.cardBtn}`}>
+              Get Free Consultation
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  <CTA 
+    title={call_to_action.title} 
+    content={call_to_action.content} 
+    button={call_to_action.button} 
+    image={call_to_action.image} 
+  />
+</Layout>

@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import styles from './blog.module.css';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+---
+
+<Layout title="Blog | Sahajanand Digital" description="Read our latest articles on web development, SEO, and IT solutions.">
+  <div class="section">
+    <div class="container">
+      <div class="text-center mb-8">
+        <h1>Latest Blog Posts</h1>
+        <p>Insights and articles from our team.</p>
+      </div>
+      <div class={styles.grid}>
+        {posts.map((post) => (
+          <div class={styles.card}>
+            <a href={`/blog/${post.data.slug || post.id}`}>
+              <div class={styles.imageWrapper}>
+                <img
+                  src={post.data.image?.startsWith('/') ? post.data.image : `/${post.data.image}`}
+                  alt={post.data.title}
+                  class={styles.image}
+                  loading="lazy"
+                />
+              </div>
+            </a>
+            <div class={styles.content}>
+              <div class={styles.date}>{new Date(post.data.date).toLocaleDateString()}</div>
+              <h2 class={styles.title}>
+                <a href={`/blog/${post.data.slug || post.id}`}>{post.data.title}</a>
+              </h2>
+              <p class={styles.description}>{post.data.description}</p>
+              <a href={`/blog/${post.data.slug || post.id}`} class={styles.link}>
+                Read More &rarr;
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

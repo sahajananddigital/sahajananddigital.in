@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import styles from '../blog/post.module.css';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('case-study');
+  return posts.map(post => ({
+    params: { slug: post.data.slug || post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout 
+  title={`${post.data.title} | Case Study`} 
+  description={post.data.description}
+  image={post.data.image}
+>
+  <article class="section">
+    <div class="container">
+      <div class={styles.header}>
+        {post.data.date && <span class={styles.date}>Published on {new Date(post.data.date).toLocaleDateString()}</span>}
+        <h1 class={styles.title}>{post.data.title}</h1>
+        {post.data.image && (
+          <div class={styles.imageWrapper}>
+            <img
+              src={post.data.image.startsWith('/') ? post.data.image : `/${post.data.image}`}
+              alt={post.data.title}
+              width="1200"
+              height="600"
+              class={styles.image}
+              fetchpriority="high"
+            />
+          </div>
+        )}
+      </div>
+      <div class={styles.content}>
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>

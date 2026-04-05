@@ -1,0 +1,76 @@
+---
+import styles from './Footer.module.css';
+import { Image } from 'astro:assets';
+
+const footerMenuLeft = [
+  { name: 'Quick Start', url: '/contact' },
+];
+
+const footerMenuMiddle = [
+  { name: 'Services', url: '/services' },
+];
+
+const footerMenuRight = [
+  { name: 'Privacy Policy', url: '/privacy-policy' },
+  { name: 'Terms & Conditions', url: '/terms-conditions' },
+  { name: 'Case Study', url: '/case-study' },
+];
+---
+
+<footer class={styles.footer}>
+  <div class="container">
+    <div class={styles.grid}>
+      <div class={styles.column}>
+        <h3 class={styles.title}>Company</h3>
+        <ul class={styles.list}>
+          {footerMenuLeft.map((item) => (
+            <li>
+              <a href={item.url}>{item.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class={styles.column}>
+        <h3 class={styles.title}>Services</h3>
+        <ul class={styles.list}>
+          {footerMenuMiddle.map((item) => (
+            <li>
+              <a href={item.url}>{item.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class={styles.column}>
+        <h3 class={styles.title}>Support</h3>
+        <ul class={styles.list}>
+          {footerMenuRight.map((item) => (
+            <li>
+              <a href={item.url}>{item.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class={styles.column}>
+         <a href="/" class={styles.brand}>
+            <img 
+              src="/images/logo.png" 
+              alt="Sahajanand Digital" 
+              width="200" 
+              height="50" 
+              class="img-fluid"
+            />
+        </a>
+        <p class={styles.description}>
+          Sahajanad Digital is one the responsible IT company in the india
+        </p>
+        <ul class={styles.social}>
+            <li><a href="https://twitter.com/SahajanandDgtal" title="twitter"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.linkedin.com/company/sahajanand-digital" title="linkedin"><i class="fab fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class={styles.bottom}>
+      <small>&copy; {new Date().getFullYear()} Sahajanand Digital. All Rights Reserved.</small>
+    </div>
+  </div>
+</footer>

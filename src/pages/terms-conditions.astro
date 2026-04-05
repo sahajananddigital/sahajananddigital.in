@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import * as termsConditions from '../content/pages/terms-conditions/_index.md';
+
+const { frontmatter, Content } = termsConditions;
+---
+
+<Layout title={`${frontmatter.title} | Sahajanand Digital`}>
+  <div class="section">
+    <div class="container">
+      <h1>{frontmatter.title}</h1>
+      <div class="mb-8"></div>
+      <div style="line-height: 1.8;">
+        <Content />
+      </div>
+    </div>
+  </div>
+</Layout>

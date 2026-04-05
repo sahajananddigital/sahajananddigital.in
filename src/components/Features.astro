@@ -1,0 +1,35 @@
+---
+import styles from './Features.module.css';
+
+interface FeatureItem {
+  name: string;
+  icon: string;
+  content: string;
+}
+
+interface Props {
+  title: string;
+  features: FeatureItem[];
+}
+
+const { title, features } = Astro.props;
+---
+
+<section class="section bg-gradient">
+  <div class="container">
+    <div class="text-center mb-12">
+      <h2>{title}</h2>
+    </div>
+    <div class={styles.grid}>
+      {features.map((feature) => (
+        <div class={styles.feature}>
+          <div class={styles.iconWrapper}>
+            <i class={feature.icon}></i>
+          </div>
+          <h3 class={styles.name}>{feature.name}</h3>
+          <p class={styles.content}>{feature.content}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

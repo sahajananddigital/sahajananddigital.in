@@ -1,0 +1,43 @@
+---
+import styles from './CTA.module.css';
+
+interface Props {
+  title: string;
+  content: string;
+  image: string;
+  button: {
+    enable: boolean;
+    label: string;
+    link: string;
+  };
+}
+
+const { title, content, image, button } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <div class={styles.cta}>
+      <div class={styles.grid}>
+        <div class={styles.content}>
+          <h2 class={styles.title}>{title}</h2>
+          <p class={styles.text}>{content}</p>
+          {button.enable && (
+            <a href={`/${button.link}`} class="btn btn-primary">
+              {button.label}
+            </a>
+          )}
+        </div>
+        <div class={styles.imageWrapper}>
+          <img 
+            src={image.startsWith('/') ? image : `/${image}`} 
+            alt={title} 
+            width="400" 
+            height="300" 
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
