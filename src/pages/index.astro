@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import CTA from '../components/CTA.astro';
+import styles from './index.module.css';
+
+// Import markdown directly, Astro parses frontmatter automatically
+import * as indexPage from '../content/pages/_index.md';
+const { banner, feature, service, screenshot, call_to_action } = indexPage.frontmatter;
+---
+
+<Layout>
+  <Hero 
+    title={banner.title} 
+    content={banner.content} 
+    image={banner.image} 
+    button={banner.button} 
+  />
+  
+  {feature.enable && (
+    <Features 
+      title={feature.title} 
+      features={feature.feature_item} 
+    />
+  )}
+
+  {service.enable && service.service_item.map((item: any, index: number) => (
+    <section class="section bg-light">
+      <div class="container">
+        <div class={styles.serviceSection}>
+          <div class={styles.serviceImage}>
+             <img 
+              src={item.images[0].startsWith('/') ? item.images[0] : `/${item.images[0]}`} 
+              alt={item.title} 
+              width="600" 
+              height="500" 
+              class="img-fluid"
+              loading="lazy"
+            />
+          </div>
+          <div class={styles.serviceContent}>
+            <h2 class="mb-6">{item.title}</h2>
+            <p class="mb-10 text-lg text-gray-600">{item.content}</p>
+            {item.button.enable && (
+              <a href={`/${item.button.link}`} class="btn btn-primary">
+                {item.button.label}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+  
+  {screenshot.enable && (
+    <section class="section">
+      <div class="container text-center">
+        <div class="mb-12 max-w-3xl mx-auto">
+          <h2 class="mb-6" set:html={screenshot.title}></h2>
+        </div>
+        <img 
+          src={`/${screenshot.image}`} 
+          alt="Workflow Dashboard" 
+          width="1000" 
+          height="600" 
+          class="img-fluid mx-auto"
+          loading="lazy"
+        />
+      </div>
+    </section>
+  )}
+
+  {call_to_action.enable && (
+    <CTA 
+      title={call_to_action.title} 
+      content={call_to_action.content} 
+      button={call_to_action.button} 
+      image={call_to_action.image}
+    />
+  )}
+</Layout>

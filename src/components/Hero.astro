@@ -1,0 +1,47 @@
+---
+import styles from './Hero.module.css';
+
+interface Props {
+  title: string;
+  content: string;
+  image: string;
+  button: {
+    enable: boolean;
+    label: string;
+    link: string;
+  };
+}
+
+const { title, content, image, button } = Astro.props;
+---
+
+<section class={styles.hero}>
+  <div class="container">
+    <div class={styles.grid}>
+      <div class={styles.content}>
+        <h1 class={styles.title}>{title}</h1>
+        <p class={styles.text} set:html={content}></p>
+        {button.enable && (
+          <div class={styles.actions}>
+            <a href={`/${button.link}`} class="btn btn-primary">
+              {button.label}
+            </a>
+            <a href="/case-study" class="btn btn-outline">
+              View Our Work
+            </a>
+          </div>
+        )}
+      </div>
+      <div class={styles.imageWrapper}>
+        <img 
+          src={image.startsWith('/') ? image : `/${image}`} 
+          alt={title} 
+          width="600" 
+          height="500" 
+          class="img-fluid"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </div>
+</section>

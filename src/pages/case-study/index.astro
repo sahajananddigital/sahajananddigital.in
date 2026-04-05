@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import styles from './CaseStudy.module.css';
+
+const allPosts = await getCollection('case-study');
+const posts = allPosts.filter(post => !post.data.draft);
+---
+
+<Layout title="Case Studies | Sahajanand Digital" description="Explore our successful projects and how we helped our clients grow through innovative digital solutions.">
+  <div class="section">
+    <div class="container">
+      <div class="text-center mb-16">
+        <h1 class="mb-6">Proven Success Stories</h1>
+        <p class="text-lg max-w-3xl mx-auto">Discover how we transform complex business challenges into elegant, scalable digital solutions that drive real business impact.</p>
+      </div>
+      <div class={styles.grid}>
+        {posts.map((post) => (
+          <div class={styles.card}>
+            <a href={`/case-study/${post.data.slug || post.id}`}>
+              <div class={styles.imageWrapper}>
+                <img
+                  src={post.data.image?.startsWith('/') ? post.data.image : `/${post.data.image}`}
+                  alt={post.data.title}
+                  class={styles.image}
+                  loading="lazy"
+                />
+              </div>
+            </a>
+            <div class={styles.content}>
+              {post.data.category && <span class={styles.category}>{post.data.category}</span>}
+              <h2 class={styles.title}>
+                <a href={`/case-study/${post.data.slug || post.id}`}>{post.data.title}</a>
+              </h2>
+              <p class={styles.description}>{post.data.description}</p>
+              <a href={`/case-study/${post.data.slug || post.id}`} class={styles.link}>
+                View Case Study <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Layout>

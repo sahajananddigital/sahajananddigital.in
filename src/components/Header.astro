@@ -1,0 +1,117 @@
+---
+import styles from './Header.module.css';
+
+const menuItems = [
+  { name: 'Home', url: '/' },
+  { name: 'Blog', url: '/blog' },
+  { name: 'Services', url: '/services' },
+  { name: 'Contact', url: '/contact' },
+  { name: 'Case Study', url: '/case-study' },
+];
+---
+
+<header class={styles.header}>
+  <div class="container">
+    <nav class={styles.nav}>
+      <a href="/" class={styles.brand} id="brand-link">
+        <img 
+          src="/images/logo.png" 
+          alt="Sahajanand Digital" 
+          width="200" 
+          height="50" 
+          class="img-fluid"
+          fetchpriority="high"
+        />
+      </a>
+
+      <ul class={styles.menu} id="mobile-menu">
+        <button class={styles.closeButton} id="close-menu-btn" aria-label="Close Menu">
+          <i class="fas fa-times"></i>
+        </button>
+        {menuItems.map((item) => (
+          <li class={styles.menuItem}>
+            <a 
+              href={item.url} 
+              class={`${styles.menuLink} menu-link`}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+        <li class={styles.mobileActions}>
+          <a href="/contact" class="btn btn-sm btn-primary menu-link">
+            Get Started
+          </a>
+        </li>
+      </ul>
+
+      <div class={styles.navActions}>
+        <button 
+          class={styles.hamburger}
+          id="hamburger-btn"
+          aria-label="Open Menu"
+        >
+          <i class="fas fa-bars" id="hamburger-icon"></i>
+        </button>
+
+        <div class={styles.actions}>
+          <a href="/contact" class="btn btn-sm btn-primary">
+            Get Started
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const closeMenuBtn = document.getElementById('close-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const menuLinks = document.querySelectorAll('.menu-link');
+  const brandLink = document.getElementById('brand-link');
+
+  let isMenuOpen = false;
+
+  const toggleMenu = () => {
+    isMenuOpen = !isMenuOpen;
+    updateMenuState();
+  };
+
+  const closeMenu = () => {
+    isMenuOpen = false;
+    updateMenuState();
+  };
+
+  const updateMenuState = () => {
+    if (isMenuOpen) {
+      mobileMenu?.classList.add('Header_menuOpen__active'); // Assuming css modules creates a class, we'll just add a global active class or use data-attribute
+      document.body.style.overflow = 'hidden';
+      hamburgerIcon?.classList.remove('fa-bars');
+      hamburgerIcon?.classList.add('fa-times');
+    } else {
+      mobileMenu?.classList.remove('Header_menuOpen__active');
+      document.body.style.overflow = 'unset';
+      hamburgerIcon?.classList.add('fa-bars');
+      hamburgerIcon?.classList.remove('fa-times');
+    }
+  };
+
+  hamburgerBtn?.addEventListener('click', toggleMenu);
+  closeMenuBtn?.addEventListener('click', closeMenu);
+  brandLink?.addEventListener('click', closeMenu);
+  
+  menuLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
+
+<style is:global>
+  /* Since we can't easily reference the hashed CSS module class in the script, we use a global class to override the menu state */
+  .Header_menuOpen__active {
+    right: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+</style>
