@@ -1,0 +1,38 @@
+[
+  {
+    "id": "none",
+    "name": "No Business Email",
+    "monthlyPrice_inr": 0,
+    "monthlyPrice_usd": 0,
+    "setupPrice_inr": 0,
+    "setupPrice_usd": 0,
+    "description": "I will handle emails separately."
+  },
+  {
+    "id": "google",
+    "name": "Google Workspace",
+    "monthlyPrice_inr": 130,
+    "monthlyPrice_usd": 6,
+    "setupPrice_inr": 1000,
+    "setupPrice_usd": 25,
+    "description": "Professional @yourcompany.com email via Gmail."
+  },
+  {
+    "id": "microsoft",
+    "name": "Microsoft 365",
+    "monthlyPrice_inr": 150,
+    "monthlyPrice_usd": 6,
+    "setupPrice_inr": 1000,
+    "setupPrice_usd": 25,
+    "description": "Outlook, Teams, and Office apps for business."
+  },
+  {
+    "id": "zoho",
+    "name": "Zoho Mail",
+    "monthlyPrice_inr": 60,
+    "monthlyPrice_usd": 1,
+    "setupPrice_inr": 500,
+    "setupPrice_usd": 15,
+    "description": "Secure, ad-free business email with privacy focus."
+  }
+]

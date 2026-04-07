@@ -1,0 +1,30 @@
+[
+  {
+    "id": "none",
+    "name": "Self-Managed",
+    "monthlyPrice_inr": 0,
+    "monthlyPrice_usd": 0,
+    "description": "You handle all updates and security yourself."
+  },
+  {
+    "id": "essential",
+    "name": "Essential Care",
+    "monthlyPrice_inr": 1500,
+    "monthlyPrice_usd": 49,
+    "description": "Security patches, weekly backups, and core updates."
+  },
+  {
+    "id": "growth",
+    "name": "Growth Partner",
+    "monthlyPrice_inr": 3500,
+    "monthlyPrice_usd": 149,
+    "description": "Essential + 2 hours of content updates & speed optimization."
+  },
+  {
+    "id": "scale",
+    "name": "Strategic Scale",
+    "monthlyPrice_inr": 7500,
+    "monthlyPrice_usd": 299,
+    "description": "Priority support, monthly SEO audit, and unlimited small tweaks."
+  }
+]
