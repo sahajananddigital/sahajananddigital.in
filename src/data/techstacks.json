@@ -1,0 +1,30 @@
+[
+  {
+    "id": "wordpress",
+    "name": "WordPress",
+    "basePrice": 2000,
+    "perPagePrice": 1500,
+    "description": "Standard WordPress site with CMS"
+  },
+  {
+    "id": "static",
+    "name": "Static (HTML/CSS/Astro)",
+    "basePrice": 1500,
+    "perPagePrice": 1200,
+    "description": "Fast, SEO-friendly static site"
+  },
+  {
+    "id": "react",
+    "name": "Custom (React/Next.js)",
+    "basePrice": 5000,
+    "perPagePrice": 2500,
+    "description": "High-performance custom web app"
+  },
+  {
+    "id": "ecommerce",
+    "name": "E-commerce (WooCommerce)",
+    "basePrice": 8000,
+    "perPagePrice": 3500,
+    "description": "Full-featured online store"
+  }
+]

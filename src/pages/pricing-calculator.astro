@@ -1,0 +1,241 @@
+---
+import Layout from '../layouts/Layout.astro';
+import styles from './pricing-calculator.module.css';
+import domainData from '../data/domains.json';
+import techStacks from '../data/techstacks.json';
+
+const title = "Interactive Project Estimator | Sahajanand Digital";
+const description = "Get a transparent, value-driven estimate for your next digital project in minutes.";
+
+const DOMAIN_PRICES = domainData.reduce((acc: any, item: any) => {
+  acc[item.tld] = item.price;
+  return acc;
+}, {});
+
+const TECH_PRICES = techStacks.reduce((acc: any, item: any) => {
+  acc[item.id] = { base: item.basePrice, perPage: item.perPagePrice };
+  return acc;
+}, {});
+
+const MARKUP = 200;
+const SECTIONS_INCLUDED = 6;
+const EXTRA_SECTION_COST = 300;
+const HOSTING_COST = 3800;
+const HOURLY_RATE = 600;
+
+const initialTech = techStacks[0];
+---
+
+<Layout title={title} description={description}>
+  <div class={styles.pageWrapper}>
+    <div class="container">
+      <header class={styles.calculatorHeader}>
+        <h1>Plan Your Digital Success</h1>
+        <p>
+          Transparency is the foundation of partnership. Use our interactive estimator to 
+          scope your project and understand the investment required to reach your goals.
+        </p>
+      </header>
+
+      <div class={styles.calculatorCard}>
+        <!-- Input Area -->
+        <div class={styles.inputSection}>
+          
+          <!-- Step 1: Technology -->
+          <div class={styles.stepTitle}><span>1</span> Foundation & Tech Stack</div>
+          <div class={styles.formGroup}>
+            <label for="techStack" class={styles.label}>Choose Your Platform</label>
+            <select id="techStack" class={styles.select}>
+              {techStacks.map((tech) => (
+                <option value={tech.id}>{tech.name}</option>
+              ))}
+            </select>
+            <p id="techDescription" class="text-sm mt-2 text-gray-500 italic">{initialTech.description}</p>
+          </div>
+
+          <!-- Step 2: Scale -->
+          <div class={styles.stepTitle}><span>2</span> Scope & Scale</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class={styles.formGroup}>
+              <label for="pageCount" class={styles.label}>Number of Pages</label>
+              <input type="number" id="pageCount" class={styles.input} min="1" value="1" />
+            </div>
+            <div class={styles.formGroup}>
+              <label for="avgSections" class={styles.label}>Complexity (Sections/Page)</label>
+              <input type="number" id="avgSections" class={styles.input} min="1" value="6" />
+            </div>
+          </div>
+
+          <!-- Step 3: Infrastructure -->
+          <div class={styles.stepTitle}><span>3</span> Infrastructure & Launch</div>
+          <div class="space-y-4">
+             <div class={styles.formGroup}>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="includeDomain" checked class="w-5 h-5 accent-blue-600" />
+                <span class="font-semibold text-gray-700">I need a new domain registration</span>
+              </label>
+            </div>
+            
+            <div id="domainSelectionArea" class={styles.formGroup}>
+              <select id="domainType" class={styles.select}>
+                {domainData.map((item) => (
+                  <option value={item.tld}>
+                    .{item.tld} (₹{item.price})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div class={styles.formGroup}>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" id="includeHosting" checked class="w-5 h-5 accent-blue-600" />
+                <span class="font-semibold text-gray-700">Worry-free Managed Hosting (Annual)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 4: Customization -->
+          <div class={styles.stepTitle}><span>4</span> Additional Requirements</div>
+          <div class={styles.formGroup}>
+            <label for="extraHours" class={styles.label}>Specific Custom Features (Est. Hours)</label>
+            <input type="number" id="extraHours" class={styles.input} min="0" value="0" placeholder="e.g. API integration, custom logic" />
+          </div>
+        </div>
+
+        <!-- Result Sidebar -->
+        <div class={styles.summarySection}>
+          <h2 class={styles.summaryTitle}>Investment Summary</h2>
+          
+          <div class="space-y-4">
+            <div class={styles.resultItem}>
+              <span>Domain & Setup</span>
+              <span id="domainPriceText" class="font-bold">₹0</span>
+            </div>
+            <div class={styles.resultItem}>
+              <span>Tech Build & Design</span>
+              <span id="pagesCostText" class="font-bold">₹0</span>
+            </div>
+            <div class={styles.resultItem}>
+              <span>Custom Components</span>
+              <span id="extraSectionsCostText" class="font-bold">₹0</span>
+            </div>
+            <div class={styles.resultItem}>
+              <span>Managed Hosting</span>
+              <span id="hostingCostText" class="font-bold">₹0</span>
+            </div>
+            <div class={styles.resultItem}>
+              <span>Advanced Features</span>
+              <span id="extraWorkCostText" class="font-bold">₹0</span>
+            </div>
+
+            <div class={`${styles.resultItem} ${styles.total}`}>
+              <div class="flex flex-col">
+                <span class="text-sm text-gray-500 uppercase tracking-widest">Estimated Total</span>
+                <span id="totalCost" class={styles.totalValue}>₹0</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="/contact" class={styles.ctaButton}>
+            Get a Personalized Strategy <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+          
+          <p class="text-xs text-center mt-4 text-gray-400">
+            No obligation. Our experts will review your estimate.
+          </p>
+        </div>
+      </div>
+
+      <!-- Disclaimers - Value Driven -->
+      <div class={styles.disclaimerBox}>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">The "Fine Print" (We Keep It Simple)</h3>
+        <p class="text-gray-600 italic border-b pb-4 border-gray-200">
+          Sales involves more than just numbers—it involves understanding your vision.
+        </p>
+        
+        <div class={styles.disclaimerGrid}>
+          <div class={styles.disclaimerItem}>
+            <h4>Pricing Flexibility</h4>
+            <p>Every business is unique. These numbers are a starting point for our discussion—not a fixed barrier. We optimize for your budget.</p>
+          </div>
+          <div class={styles.disclaimerItem}>
+            <h4>What's Included?</h4>
+            <p>Each page includes up to {SECTIONS_INCLUDED} high-converting sections. Beyond that, we quote transparently for the extra complexity.</p>
+          </div>
+          <div class={styles.disclaimerItem}>
+            <h4>Partnership Focus</h4>
+            <p>We are open to negotiations for long-term partnerships, multi-project deals, and non-profit organizations.</p>
+          </div>
+          <div class={styles.disclaimerItem}>
+            <h4>Market Dynamics</h4>
+            <p>Infrastructure costs (Domains/Hosting) are pass-through costs based on global market rates at the time of your launch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ DOMAIN_PRICES, TECH_PRICES, MARKUP, SECTIONS_INCLUDED, EXTRA_SECTION_COST, HOSTING_COST, HOURLY_RATE, techStacks }}>
+    const techSelect = document.getElementById('techStack');
+    const techDesc = document.getElementById('techDescription');
+    const domainCheckbox = document.getElementById('includeDomain');
+    const domainSelect = document.getElementById('domainType');
+    const domainArea = document.getElementById('domainSelectionArea');
+    const pageInput = document.getElementById('pageCount');
+    const sectionsInput = document.getElementById('avgSections');
+    const hostingCheckbox = document.getElementById('includeHosting');
+    const extraHoursInput = document.getElementById('extraHours');
+
+    const domainPriceText = document.getElementById('domainPriceText');
+    const pagesCostText = document.getElementById('pagesCostText');
+    const extraSectionsCostText = document.getElementById('extraSectionsCostText');
+    const hostingCostText = document.getElementById('hostingCostText');
+    const extraWorkCostText = document.getElementById('extraWorkCostText');
+    const totalCostText = document.getElementById('totalCost');
+
+    function calculate() {
+      const techId = techSelect.value;
+      const includeDomain = domainCheckbox.checked;
+      const domainType = domainSelect.value;
+      const pages = parseInt(pageInput.value) || 0;
+      const sectionsPerPage = parseInt(sectionsInput.value) || 0;
+      const includeHosting = hostingCheckbox.checked;
+      const extraHours = parseInt(extraHoursInput.value) || 0;
+      
+      const selectedTech = techStacks.find(t => t.id === techId);
+      if (selectedTech) techDesc.textContent = selectedTech.description;
+
+      domainArea.style.opacity = includeDomain ? '1' : '0.5';
+      domainSelect.disabled = !includeDomain;
+      const domainBase = includeDomain ? (DOMAIN_PRICES[domainType] || 0) : 0;
+      const domainTotal = includeDomain ? (domainBase + MARKUP) : 0;
+      
+      const techPrices = TECH_PRICES[techId];
+      const techBase = techPrices.base;
+      const techPerPage = techPrices.perPage;
+      const pagesTotal = techBase + (pages * techPerPage);
+
+      const extraSectionsPerPage = Math.max(0, sectionsPerPage - SECTIONS_INCLUDED);
+      const extraSectionsTotal = extraSectionsPerPage * EXTRA_SECTION_COST * pages;
+      
+      const hostingTotal = includeHosting ? HOSTING_COST : 0;
+      const extraWorkTotal = extraHours * HOURLY_RATE;
+
+      const total = domainTotal + pagesTotal + extraSectionsTotal + hostingTotal + extraWorkTotal;
+
+      domainPriceText.textContent = `₹${domainTotal.toLocaleString()}`;
+      pagesCostText.textContent = `₹${pagesTotal.toLocaleString()}`;
+      extraSectionsCostText.textContent = `₹${extraSectionsTotal.toLocaleString()}`;
+      hostingCostText.textContent = `₹${hostingTotal.toLocaleString()}`;
+      extraWorkCostText.textContent = `₹${extraWorkTotal.toLocaleString()}`;
+      totalCostText.textContent = `₹${total.toLocaleString()}`;
+    }
+
+    [techSelect, domainCheckbox, domainSelect, pageInput, sectionsInput, hostingCheckbox, extraHoursInput].forEach(el => {
+      el.addEventListener('input', calculate);
+      el.addEventListener('change', calculate);
+    });
+
+    calculate(); // Initial call
+  </script>
+</Layout>

@@ -1,0 +1,9 @@
+[
+  { "tld": "com", "price": 1300 },
+  { "tld": "in", "price": 800 },
+  { "tld": "co.in", "price": 500 },
+  { "tld": "org", "price": 1300 },
+  { "tld": "net", "price": 1500 },
+  { "tld": "co", "price": 2500 },
+  { "tld": "info", "price": 1500 }
+]
