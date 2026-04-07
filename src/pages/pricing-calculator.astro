@@ -3,239 +3,500 @@ import Layout from '../layouts/Layout.astro';
 import styles from './pricing-calculator.module.css';
 import domainData from '../data/domains.json';
 import techStacks from '../data/techstacks.json';
+import maintenanceData from '../data/maintenance.json';
+import hostingData from '../data/hosting.json';
+import emailData from '../data/emails.json';
 
-const title = "Interactive Project Estimator | Sahajanand Digital";
-const description = "Get a transparent, value-driven estimate for your next digital project in minutes.";
+const title = "Project Estimator | Sahajanand Digital";
+const description = "Configure your high-performance digital asset and get a transparent investment breakdown.";
 
-const DOMAIN_PRICES = domainData.reduce((acc: any, item: any) => {
-  acc[item.tld] = item.price;
-  return acc;
-}, {});
-
-const TECH_PRICES = techStacks.reduce((acc: any, item: any) => {
-  acc[item.id] = { base: item.basePrice, perPage: item.perPagePrice };
-  return acc;
-}, {});
-
-const MARKUP = 200;
+// Constants
+const MARKUP_INR = 200;
+const MARKUP_USD = 5;
+const HOURLY_RATE_INR = 600;
+const HOURLY_RATE_USD = 50;
 const SECTIONS_INCLUDED = 6;
-const EXTRA_SECTION_COST = 300;
-const HOSTING_COST = 3800;
-const HOURLY_RATE = 600;
+const EXTRA_SECTION_COST_INR = 300;
+const EXTRA_SECTION_COST_USD = 10;
 
 const initialTech = techStacks[0];
+const initialMaint = maintenanceData[1];
+const initialHosting = hostingData[0];
+const initialEmail = emailData[0];
 ---
 
 <Layout title={title} description={description}>
   <div class={styles.pageWrapper}>
-    <div class="container">
+    <div class={styles.container}>
       <header class={styles.calculatorHeader}>
-        <h1>Plan Your Digital Success</h1>
-        <p>
-          Transparency is the foundation of partnership. Use our interactive estimator to 
-          scope your project and understand the investment required to reach your goals.
-        </p>
+        <h1>Project Investment Estimator</h1>
+        <p>A transparent, two-step process to scope your next digital success.</p>
+        <div class="mt-4 inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs font-bold border border-blue-100 uppercase tracking-wider">
+          <i class="fas fa-sync-alt mr-2"></i> Prices current as of {new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+        </div>
       </header>
 
-      <div class={styles.calculatorCard}>
-        <!-- Input Area -->
-        <div class={styles.inputSection}>
-          
-          <!-- Step 1: Technology -->
-          <div class={styles.stepTitle}><span>1</span> Foundation & Tech Stack</div>
-          <div class={styles.formGroup}>
-            <label for="techStack" class={styles.label}>Choose Your Platform</label>
-            <select id="techStack" class={styles.select}>
-              {techStacks.map((tech) => (
-                <option value={tech.id}>{tech.name}</option>
-              ))}
-            </select>
-            <p id="techDescription" class="text-sm mt-2 text-gray-500 italic">{initialTech.description}</p>
-          </div>
-
-          <!-- Step 2: Scale -->
-          <div class={styles.stepTitle}><span>2</span> Scope & Scale</div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class={styles.formGroup}>
-              <label for="pageCount" class={styles.label}>Number of Pages</label>
-              <input type="number" id="pageCount" class={styles.input} min="1" value="1" />
-            </div>
-            <div class={styles.formGroup}>
-              <label for="avgSections" class={styles.label}>Complexity (Sections/Page)</label>
-              <input type="number" id="avgSections" class={styles.input} min="1" value="6" />
-            </div>
-          </div>
-
-          <!-- Step 3: Infrastructure -->
-          <div class={styles.stepTitle}><span>3</span> Infrastructure & Launch</div>
-          <div class="space-y-4">
-             <div class={styles.formGroup}>
-              <label class="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" id="includeDomain" checked class="w-5 h-5 accent-blue-600" />
-                <span class="font-semibold text-gray-700">I need a new domain registration</span>
-              </label>
-            </div>
-            
-            <div id="domainSelectionArea" class={styles.formGroup}>
-              <select id="domainType" class={styles.select}>
-                {domainData.map((item) => (
-                  <option value={item.tld}>
-                    .{item.tld} (₹{item.price})
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div class={styles.formGroup}>
-              <label class="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" id="includeHosting" checked class="w-5 h-5 accent-blue-600" />
-                <span class="font-semibold text-gray-700">Worry-free Managed Hosting (Annual)</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Step 4: Customization -->
-          <div class={styles.stepTitle}><span>4</span> Additional Requirements</div>
-          <div class={styles.formGroup}>
-            <label for="extraHours" class={styles.label}>Specific Custom Features (Est. Hours)</label>
-            <input type="number" id="extraHours" class={styles.input} min="0" value="0" placeholder="e.g. API integration, custom logic" />
-          </div>
-        </div>
-
-        <!-- Result Sidebar -->
-        <div class={styles.summarySection}>
-          <h2 class={styles.summaryTitle}>Investment Summary</h2>
-          
-          <div class="space-y-4">
-            <div class={styles.resultItem}>
-              <span>Domain & Setup</span>
-              <span id="domainPriceText" class="font-bold">₹0</span>
-            </div>
-            <div class={styles.resultItem}>
-              <span>Tech Build & Design</span>
-              <span id="pagesCostText" class="font-bold">₹0</span>
-            </div>
-            <div class={styles.resultItem}>
-              <span>Custom Components</span>
-              <span id="extraSectionsCostText" class="font-bold">₹0</span>
-            </div>
-            <div class={styles.resultItem}>
-              <span>Managed Hosting</span>
-              <span id="hostingCostText" class="font-bold">₹0</span>
-            </div>
-            <div class={styles.resultItem}>
-              <span>Advanced Features</span>
-              <span id="extraWorkCostText" class="font-bold">₹0</span>
-            </div>
-
-            <div class={`${styles.resultItem} ${styles.total}`}>
-              <div class="flex flex-col">
-                <span class="text-sm text-gray-500 uppercase tracking-widest">Estimated Total</span>
-                <span id="totalCost" class={styles.totalValue}>₹0</span>
-              </div>
-            </div>
-          </div>
-
-          <a href="/contact" class={styles.ctaButton}>
-            Get a Personalized Strategy <i class="fas fa-arrow-right ml-2"></i>
-          </a>
-          
-          <p class="text-xs text-center mt-4 text-gray-400">
-            No obligation. Our experts will review your estimate.
-          </p>
+      <!-- Market Switcher -->
+      <div class={styles.marketSwitcher}>
+        <div class={styles.switcherTrack}>
+          <button type="button" id="marketInr" class={`${styles.marketBtn} ${styles.marketBtnActive}`}>
+            <span>🇮🇳</span> India (INR)
+          </button>
+          <button type="button" id="marketUsd" class={styles.marketBtn}>
+            <span>🇺🇸</span> USA (USD)
+          </button>
         </div>
       </div>
 
-      <!-- Disclaimers - Value Driven -->
+      <!-- Progress Nav -->
+      <nav class={styles.progressNav}>
+        <div id="step1Ind" class={`${styles.stepIndicator} ${styles.stepIndicatorActive}`}>
+          <div class={styles.stepCircle}>1</div>
+          <span>Foundation</span>
+        </div>
+        <div class={styles.stepLine}></div>
+        <div id="step2Ind" class={styles.stepIndicator}>
+          <div class={styles.stepCircle}>2</div>
+          <span>Engineering</span>
+        </div>
+      </nav>
+
+      <div class={styles.layoutGrid}>
+        <!-- Left: Configurator -->
+        <div class={styles.configurator}>
+          <div class={styles.masterCard}>
+            
+            <!-- STEP 1: Foundation & Identity -->
+            <div id="step1Content" class={`${styles.configStep} ${styles.configStepActive}`}>
+              
+              <!-- Domain -->
+              <div class={styles.sectionDivider}>
+                <div class={styles.sectionHeader}>
+                  <h3><i class="fas fa-globe"></i> 1. Brand Identity (Domain)</h3>
+                  <p class={styles.salesNote}>Your digital address. Select your preferred extension for annual registration.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 mb-4">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-bold text-slate-800">I need a new domain</span>
+                    <input type="checkbox" id="includeDomain" checked class="w-6 h-6 rounded-lg accent-blue-600 cursor-pointer" />
+                  </div>
+                  <div id="domainSelectionArea">
+                    <select id="domainType" class={styles.select}>
+                      {domainData.map((item) => (
+                        <option value={item.tld} data-inr={item.price_inr} data-usd={item.price_usd}>.{item.tld}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hosting -->
+              <div class={styles.sectionDivider}>
+                <div class={styles.sectionHeader}>
+                  <h3><i class="fas fa-server"></i> 2. Managed Infrastructure</h3>
+                  <p class={styles.salesNote}>Secure, high-performance yearly cloud hosting optimized for your tech stack.</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 mb-4">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-bold text-slate-800">Include Managed Hosting</span>
+                    <input type="checkbox" id="includeHosting" checked class="w-6 h-6 rounded-lg accent-blue-600 cursor-pointer" />
+                  </div>
+                  <div id="hostingSelectionArea">
+                    <select id="hostingTier" class={styles.select}>
+                      {hostingData.map((h) => (
+                        <option value={h.id} data-inr={h.price_inr} data-usd={h.price_usd}>{h.name}</option>
+                      ))}
+                    </select>
+                    <p id="hostingDescription" class="text-xs mt-3 text-slate-500 italic">{initialHosting.description}</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Business Email -->
+              <div class={styles.sectionDivider}>
+                <div class={styles.sectionHeader}>
+                  <h3><i class="fas fa-envelope"></i> 3. Professional Communication</h3>
+                  <p class={styles.salesNote}>Boost credibility with @yourcompany.com email addresses.</p>
+                </div>
+                <div class={styles.formGroup}>
+                  <label for="emailService" class={styles.label}>Email Provider</label>
+                  <select id="emailService" class={styles.select}>
+                    {emailData.map((e) => (
+                      <option value={e.id}>{e.name}</option>
+                    ))}
+                  </select>
+                  <p id="emailDescription" class="text-xs mt-3 text-slate-500 italic">{initialEmail.description}</p>
+                </div>
+                <div id="emailUsersGroup" class={styles.formGroup} style="display:none;">
+                  <label for="emailUsers" class={styles.label}>Number of Users (Email accounts)</label>
+                  <input type="number" id="emailUsers" class={styles.input} min="1" value="1" />
+                </div>
+              </div>
+
+              <div class={styles.navButtons}>
+                <div></div>
+                <button type="button" id="toStep2" class={styles.primaryBtn}>
+                  Next: Project Engineering <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2: Project Engineering -->
+            <div id="step2Content" class={styles.configStep}>
+              
+              <!-- Tech Stack -->
+              <div class={styles.sectionDivider}>
+                <div class={styles.sectionHeader}>
+                  <h3><i class="fas fa-microchip"></i> 4. Technology & Execution</h3>
+                  <p class={styles.salesNote}>Choosing the right platform for your business scalability.</p>
+                </div>
+                <div class={styles.formGroup}>
+                  <label for="techStack" class={styles.label}>Execution Platform</label>
+                  <select id="techStack" class={styles.select}>
+                    {techStacks.map((tech) => (
+                      <option value={tech.id}>{tech.name}</option>
+                    ))}
+                  </select>
+                  <p id="techDescription" class="text-xs mt-3 text-blue-600 font-medium">{initialTech.description}</p>
+                </div>
+              </div>
+
+              <!-- Scale -->
+              <div class={styles.sectionDivider}>
+                <div class={styles.sectionHeader}>
+                  <h3><i class="fas fa-sitemap"></i> 5. Architecture Build</h3>
+                  <p class={styles.salesNote}>Page count and complexity determine the engineering effort.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div class={styles.formGroup}>
+                    <label for="pageCount" class={styles.label}>Total Page Count</label>
+                    <input type="number" id="pageCount" class={styles.input} min="1" value="1" />
+                  </div>
+                  <div class={styles.formGroup}>
+                    <label for="avgSections" class={styles.label}>Avg. Sections per Page</label>
+                    <input type="number" id="avgSections" class={styles.input} min="1" value="6" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Maintenance -->
+              <div class={styles.sectionDivider}>
+                <div class={styles.sectionHeader}>
+                  <h3><i class="fas fa-chart-line"></i> 6. Growth & Continuity</h3>
+                  <p class={styles.salesNote}>Post-launch success care tiers.</p>
+                </div>
+                <div class={styles.formGroup}>
+                  <label for="maintenancePlan" class={styles.label}>Success Partnership</label>
+                  <select id="maintenancePlan" class={styles.select}>
+                    {maintenanceData.map((m) => (
+                      <option value={m.id} selected={m.id === 'essential'}>{m.name}</option>
+                    ))}
+                  </select>
+                  <p id="maintDescription" class="text-xs mt-3 text-slate-500 italic">{initialMaint.description}</p>
+                </div>
+              </div>
+
+              <!-- Bespoke -->
+              <div class={styles.sectionDivider}>
+                <div class={styles.sectionHeader}>
+                  <h3><i class="fas fa-tools"></i> 7. Specialized Logic</h3>
+                  <p class={styles.salesNote}>Estimated hours for custom API or complex features.</p>
+                </div>
+                <div class={styles.formGroup}>
+                  <label for="extraHours" class={styles.label}>Custom Engineering Hours</label>
+                  <input type="number" id="extraHours" class={styles.input} min="0" value="0" />
+                </div>
+              </div>
+
+              <div class={styles.navButtons}>
+                <button type="button" id="backToStep1" class={styles.secondaryBtn}>
+                  <i class="fas fa-arrow-left mr-2"></i> Back
+                </button>
+                <div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: Sticky Summary -->
+        <div class={styles.sidebar}>
+          <div class={styles.summaryCard}>
+            <h2 class={styles.summaryTitle}>Investment Summary</h2>
+            
+            <div class={styles.summaryList}>
+              <div class={styles.summaryRow}>
+                <span>Project Foundation</span>
+                <span id="setupTotal">0</span>
+              </div>
+              <div class={styles.summaryRow}>
+                <span>Digital Identity (Yearly)</span>
+                <span id="domainPriceText">0</span>
+              </div>
+              <div class={styles.summaryRow}>
+                <span>Hosting (Yearly)</span>
+                <span id="hostingCostText">0</span>
+              </div>
+              <div id="emailSummaryRow" class={styles.summaryRow} style="display:none;">
+                <span>Business Email (Monthly)</span>
+                <span id="emailMonthlyText">0</span>
+              </div>
+              <div id="emailSetupRow" class={styles.summaryRow} style="display:none;">
+                <span>Email Config (One-time)</span>
+                <span id="emailSetupText">0</span>
+              </div>
+              <div class={styles.summaryRow}>
+                <span>Engineering Build</span>
+                <span id="pagesCostText">0</span>
+              </div>
+              <div class={styles.summaryRow}>
+                <span>Bespoke Features</span>
+                <span id="extraWorkCostText">0</span>
+              </div>
+              <div class="border-t border-slate-100 my-4 pt-4">
+                <div class={styles.summaryRow}>
+                  <span class="text-blue-600 font-bold">Monthly Care</span>
+                  <span id="maintPriceText" class="text-blue-600 font-bold">0</span>
+                </div>
+              </div>
+            </div>
+
+            <div class={styles.totalSection}>
+              <span class={styles.totalLabel}>Total Project Investment</span>
+              <span id="totalCost" class={styles.totalAmount}>0</span>
+              
+              <div class={styles.advanceBox}>
+                <div class="flex justify-between items-center text-blue-700">
+                  <span class="text-xs font-bold uppercase">50% Advance to Start</span>
+                  <span id="advanceCost" class="text-lg font-black">0</span>
+                </div>
+              </div>
+              <p class="text-[10px] text-slate-400 mt-3 text-center">
+                Remaining 50% due upon project completion.
+              </p>
+            </div>
+
+            <a href="/contact" class={styles.ctaButton}>
+              Request Official Proposal
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Bottom Grid -->
       <div class={styles.disclaimerBox}>
-        <h3 class="text-xl font-bold text-gray-800 mb-2">The "Fine Print" (We Keep It Simple)</h3>
-        <p class="text-gray-600 italic border-b pb-4 border-gray-200">
-          Sales involves more than just numbers—it involves understanding your vision.
-        </p>
-        
-        <div class={styles.disclaimerGrid}>
-          <div class={styles.disclaimerItem}>
-            <h4>Pricing Flexibility</h4>
-            <p>Every business is unique. These numbers are a starting point for our discussion—not a fixed barrier. We optimize for your budget.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+          <div>
+            <h4 class="font-bold text-slate-800 mb-3 text-lg">Identity Management</h4>
+            <p class="text-sm text-slate-500 leading-relaxed">Domain, Hosting, and Professional Email services are billed annually. We ensure your digital assets are always protected.</p>
           </div>
-          <div class={styles.disclaimerItem}>
-            <h4>What's Included?</h4>
-            <p>Each page includes up to {SECTIONS_INCLUDED} high-converting sections. Beyond that, we quote transparently for the extra complexity.</p>
+          <div>
+            <h4 class="font-bold text-slate-800 mb-3 text-lg">Engineering Standards</h4>
+            <p class="text-sm text-slate-500 leading-relaxed">All our custom builds follow industrial coding standards, prioritizing SEO and page speed benchmarks.</p>
           </div>
-          <div class={styles.disclaimerItem}>
-            <h4>Partnership Focus</h4>
-            <p>We are open to negotiations for long-term partnerships, multi-project deals, and non-profit organizations.</p>
-          </div>
-          <div class={styles.disclaimerItem}>
-            <h4>Market Dynamics</h4>
-            <p>Infrastructure costs (Domains/Hosting) are pass-through costs based on global market rates at the time of your launch.</p>
+          <div>
+            <h4 class="font-bold text-slate-800 mb-3 text-lg">50/50 Commitment</h4>
+            <p class="text-sm text-slate-500 leading-relaxed">Our advance-based model ensures dedicated resources for your project timeline and mutual professional commitment.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script is:inline define:vars={{ DOMAIN_PRICES, TECH_PRICES, MARKUP, SECTIONS_INCLUDED, EXTRA_SECTION_COST, HOSTING_COST, HOURLY_RATE, techStacks }}>
+  <script is:inline define:vars={{ 
+    MARKUP_INR, MARKUP_USD, 
+    HOURLY_RATE_INR, HOURLY_RATE_USD, 
+    SECTIONS_INCLUDED, 
+    EXTRA_SECTION_COST_INR, EXTRA_SECTION_COST_USD, 
+    techStacks, maintenanceData, hostingData, emailData,
+    activeMarketClass: styles.marketBtnActive,
+    activeStepIndClass: styles.stepIndicatorActive,
+    activeStepContentClass: styles.configStepActive
+  }}>
+    let currentMarket = 'INR';
+    let currentStep = 1;
+
+    // Elements
+    const marketInrBtn = document.getElementById('marketInr');
+    const marketUsdBtn = document.getElementById('marketUsd');
+    
+    const step1Ind = document.getElementById('step1Ind');
+    const step2Ind = document.getElementById('step2Ind');
+    const step1Content = document.getElementById('step1Content');
+    const step2Content = document.getElementById('step2Content');
+    const toStep2Btn = document.getElementById('toStep2');
+    const backToStep1Btn = document.getElementById('backToStep1');
+
     const techSelect = document.getElementById('techStack');
     const techDesc = document.getElementById('techDescription');
+    const maintSelect = document.getElementById('maintenancePlan');
+    const maintDesc = document.getElementById('maintDescription');
+    const hostingSelect = document.getElementById('hostingTier');
+    const hostingDesc = document.getElementById('hostingDescription');
+    const emailSelect = document.getElementById('emailService');
+    const emailDesc = document.getElementById('emailDescription');
+    const emailUsersInput = document.getElementById('emailUsers');
+    const emailUsersGroup = document.getElementById('emailUsersGroup');
+    
     const domainCheckbox = document.getElementById('includeDomain');
     const domainSelect = document.getElementById('domainType');
     const domainArea = document.getElementById('domainSelectionArea');
+    const hostingCheckbox = document.getElementById('includeHosting');
+    const hostingArea = document.getElementById('hostingSelectionArea');
+    
     const pageInput = document.getElementById('pageCount');
     const sectionsInput = document.getElementById('avgSections');
-    const hostingCheckbox = document.getElementById('includeHosting');
     const extraHoursInput = document.getElementById('extraHours');
 
+    // Summary Elements
+    const setupTotalText = document.getElementById('setupTotal');
     const domainPriceText = document.getElementById('domainPriceText');
+    const hostingCostText = document.getElementById('hostingCostText');
+    const emailMonthlyText = document.getElementById('emailMonthlyText');
+    const emailSetupText = document.getElementById('emailSetupText');
     const pagesCostText = document.getElementById('pagesCostText');
     const extraSectionsCostText = document.getElementById('extraSectionsCostText');
-    const hostingCostText = document.getElementById('hostingCostText');
     const extraWorkCostText = document.getElementById('extraWorkCostText');
+    const maintPriceText = document.getElementById('maintPriceText');
     const totalCostText = document.getElementById('totalCost');
+    const advanceCostText = document.getElementById('advanceCost');
+
+    const emailSummaryRow = document.getElementById('emailSummaryRow');
+    const emailSetupRow = document.getElementById('emailSetupRow');
+
+    function formatCurrency(amount) {
+      return currentMarket === 'INR' 
+        ? `₹${amount.toLocaleString('en-IN')}` 
+        : `$${amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    }
+
+    function updateOptions() {
+      // Domain
+      Array.from(domainSelect.options).forEach(option => {
+        const price = currentMarket === 'INR' ? option.dataset.inr : option.dataset.usd;
+        option.textContent = `${option.value} (${formatCurrency(parseInt(price))})`;
+      });
+      // Hosting
+      Array.from(hostingSelect.options).forEach(option => {
+        const price = currentMarket === 'INR' ? option.dataset.inr : option.dataset.usd;
+        const hData = hostingData.find(h => h.id === option.value);
+        option.textContent = `${hData.name} (${formatCurrency(parseInt(price))})`;
+      });
+    }
 
     function calculate() {
       const techId = techSelect.value;
+      const maintId = maintSelect.value;
+      const hostingId = hostingSelect.value;
+      const emailId = emailSelect.value;
+      
       const includeDomain = domainCheckbox.checked;
-      const domainType = domainSelect.value;
-      const pages = parseInt(pageInput.value) || 0;
-      const sectionsPerPage = parseInt(sectionsInput.value) || 0;
       const includeHosting = hostingCheckbox.checked;
-      const extraHours = parseInt(extraHoursInput.value) || 0;
+      const pages = Math.max(1, parseInt(pageInput.value) || 0);
+      const sectionsPerPage = Math.max(1, parseInt(sectionsInput.value) || 0);
+      const extraHours = Math.max(0, parseInt(extraHoursInput.value) || 0);
+      const emailUsers = Math.max(1, parseInt(emailUsersInput.value) || 1);
       
       const selectedTech = techStacks.find(t => t.id === techId);
-      if (selectedTech) techDesc.textContent = selectedTech.description;
+      const selectedMaint = maintenanceData.find(m => m.id === maintId);
+      const selectedHosting = hostingData.find(h => h.id === hostingId);
+      const selectedEmail = emailData.find(e => e.id === emailId);
 
-      domainArea.style.opacity = includeDomain ? '1' : '0.5';
+      // Descriptions
+      techDesc.textContent = selectedTech.description;
+      maintDesc.textContent = selectedMaint.description;
+      hostingDesc.textContent = selectedHosting.description;
+      emailDesc.textContent = selectedEmail.description;
+
+      // Visibility
+      domainArea.style.opacity = includeDomain ? '1' : '0.4';
       domainSelect.disabled = !includeDomain;
-      const domainBase = includeDomain ? (DOMAIN_PRICES[domainType] || 0) : 0;
-      const domainTotal = includeDomain ? (domainBase + MARKUP) : 0;
+      hostingArea.style.opacity = includeHosting ? '1' : '0.4';
+      hostingSelect.disabled = !includeHosting;
+      emailUsersGroup.style.display = emailId === 'none' ? 'none' : 'block';
+      emailSummaryRow.style.display = emailId === 'none' ? 'none' : 'flex';
+      emailSetupRow.style.display = emailId === 'none' ? 'none' : 'flex';
+
+      const marketSuffix = currentMarket === 'INR' ? '_inr' : '_usd';
+      const markup = currentMarket === 'INR' ? MARKUP_INR : MARKUP_USD;
       
-      const techPrices = TECH_PRICES[techId];
-      const techBase = techPrices.base;
-      const techPerPage = techPrices.perPage;
-      const pagesTotal = techBase + (pages * techPerPage);
-
-      const extraSectionsPerPage = Math.max(0, sectionsPerPage - SECTIONS_INCLUDED);
-      const extraSectionsTotal = extraSectionsPerPage * EXTRA_SECTION_COST * pages;
+      // Calculations
+      const domainBase = includeDomain ? parseInt(domainSelect.options[domainSelect.selectedIndex].getAttribute(`data-${currentMarket.toLowerCase()}`)) : 0;
+      const domainTotal = includeDomain ? (domainBase + markup) : 0;
       
-      const hostingTotal = includeHosting ? HOSTING_COST : 0;
-      const extraWorkTotal = extraHours * HOURLY_RATE;
+      const techBase = selectedTech[`basePrice${marketSuffix}`];
+      const techPerPage = selectedTech[`perPagePrice${marketSuffix}`];
+      const buildTotal = techBase + (pages * techPerPage);
 
-      const total = domainTotal + pagesTotal + extraSectionsTotal + hostingTotal + extraWorkTotal;
+      const hostingPrice = includeHosting ? parseInt(hostingSelect.options[hostingSelect.selectedIndex].getAttribute(`data-${currentMarket.toLowerCase()}`)) : 0;
+      
+      const emailMonthly = selectedEmail[`monthlyPrice${marketSuffix}`] * emailUsers;
+      const emailSetup = selectedEmail[`setupPrice${marketSuffix}`];
 
-      domainPriceText.textContent = `₹${domainTotal.toLocaleString()}`;
-      pagesCostText.textContent = `₹${pagesTotal.toLocaleString()}`;
-      extraSectionsCostText.textContent = `₹${extraSectionsTotal.toLocaleString()}`;
-      hostingCostText.textContent = `₹${hostingTotal.toLocaleString()}`;
-      extraWorkCostText.textContent = `₹${extraWorkTotal.toLocaleString()}`;
-      totalCostText.textContent = `₹${total.toLocaleString()}`;
+      const extraSectionCost = currentMarket === 'INR' ? EXTRA_SECTION_COST_INR : EXTRA_SECTION_COST_USD;
+      const extraSectionsTotal = Math.max(0, sectionsPerPage - SECTIONS_INCLUDED) * extraSectionCost * pages;
+      
+      const hourlyRate = currentMarket === 'INR' ? HOURLY_RATE_INR : HOURLY_RATE_USD;
+      const extraWorkTotal = extraHours * hourlyRate;
+
+      const launchTotal = domainTotal + buildTotal + extraSectionsTotal + hostingPrice + extraWorkTotal + emailSetup;
+      const monthlyTotal = (selectedMaint[`monthlyPrice${marketSuffix}`] || 0) + emailMonthly;
+
+      // Update Summary
+      setupTotalText.textContent = formatCurrency(launchTotal);
+      domainPriceText.textContent = formatCurrency(domainTotal);
+      hostingCostText.textContent = formatCurrency(hostingPrice);
+      emailMonthlyText.textContent = `${formatCurrency(emailMonthly)}/mo`;
+      emailSetupText.textContent = formatCurrency(emailSetup);
+      pagesCostText.textContent = formatCurrency(buildTotal);
+      extraWorkCostText.textContent = formatCurrency(extraWorkTotal + extraSectionsTotal);
+      maintPriceText.textContent = `${formatCurrency(monthlyTotal)}/mo`;
+      totalCostText.textContent = formatCurrency(launchTotal + monthlyTotal);
+      advanceCostText.textContent = formatCurrency(launchTotal / 2);
     }
 
-    [techSelect, domainCheckbox, domainSelect, pageInput, sectionsInput, hostingCheckbox, extraHoursInput].forEach(el => {
+    // Step Navigation
+    function goToStep(step) {
+      currentStep = step;
+      if (step === 1) {
+        step1Content.classList.add(activeStepContentClass);
+        step2Content.classList.remove(activeStepContentClass);
+        step1Ind.classList.add(activeStepIndClass);
+        step2Ind.classList.remove(activeStepIndClass);
+      } else {
+        step1Content.classList.remove(activeStepContentClass);
+        step2Content.classList.add(activeStepContentClass);
+        step1Ind.classList.add(activeStepIndClass);
+        step2Ind.classList.add(activeStepIndClass);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    toStep2Btn.addEventListener('click', () => goToStep(2));
+    backToStep1Btn.addEventListener('click', () => goToStep(1));
+
+    marketInrBtn.addEventListener('click', () => {
+      currentMarket = 'INR';
+      marketInrBtn.classList.add(activeMarketClass);
+      marketUsdBtn.classList.remove(activeMarketClass);
+      updateOptions();
+      calculate();
+    });
+
+    marketUsdBtn.addEventListener('click', () => {
+      currentMarket = 'USD';
+      marketUsdBtn.classList.add(activeMarketClass);
+      marketInrBtn.classList.remove(activeMarketClass);
+      updateOptions();
+      calculate();
+    });
+
+    [techSelect, maintSelect, hostingSelect, emailSelect, emailUsersInput, domainCheckbox, domainSelect, hostingCheckbox, pageInput, sectionsInput, extraHoursInput].forEach(el => {
       el.addEventListener('input', calculate);
       el.addEventListener('change', calculate);
     });
 
-    calculate(); // Initial call
+    updateOptions();
+    calculate();
   </script>
 </Layout>

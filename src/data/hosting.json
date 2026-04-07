@@ -1,0 +1,30 @@
+[
+  {
+    "id": "starter",
+    "name": "Starter Managed",
+    "price_inr": 3800,
+    "price_usd": 99,
+    "description": "Ideal for small business sites. Includes SSL & Daily Backups."
+  },
+  {
+    "id": "professional",
+    "name": "Professional Cloud",
+    "price_inr": 8500,
+    "price_usd": 199,
+    "description": "High-performance cloud hosting with CDN and 24/7 monitoring."
+  },
+  {
+    "id": "business",
+    "name": "Business Critical",
+    "price_inr": 15000,
+    "price_usd": 399,
+    "description": "Dedicated resources, staging environments, and priority support."
+  },
+  {
+    "id": "enterprise",
+    "name": "Enterprise Scale",
+    "price_inr": 45000,
+    "price_usd": 999,
+    "description": "Custom cluster architecture for high-traffic applications."
+  }
+]

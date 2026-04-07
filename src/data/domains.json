@@ -1,9 +1,9 @@
 [
-  { "tld": "com", "price": 1300 },
-  { "tld": "in", "price": 800 },
-  { "tld": "co.in", "price": 500 },
-  { "tld": "org", "price": 1300 },
-  { "tld": "net", "price": 1500 },
-  { "tld": "co", "price": 2500 },
-  { "tld": "info", "price": 1500 }
+  { "tld": "com", "price_inr": 1300, "price_usd": 15 },
+  { "tld": "in", "price_inr": 800, "price_usd": 12 },
+  { "tld": "co.in", "price_inr": 500, "price_usd": 10 },
+  { "tld": "org", "price_inr": 1300, "price_usd": 18 },
+  { "tld": "net", "price_inr": 1500, "price_usd": 15 },
+  { "tld": "co", "price_inr": 2500, "price_usd": 30 },
+  { "tld": "info", "price_inr": 1500, "price_usd": 20 }
 ]
