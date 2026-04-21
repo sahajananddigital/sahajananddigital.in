@@ -1,0 +1,164 @@
+backend:
+  name: github
+  repo: sahajananddigital/sahajananddigital.in
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Slug", name: "slug", widget: "string", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Type", name: "type", widget: "select", options: ["regular", "featured"], required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "case-study"
+    label: "Case Study"
+    folder: "src/content/case-study"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", required: false }
+      - { label: "Slug", name: "slug", widget: "string", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Category", name: "category", widget: "string", required: false }
+      - { label: "Type", name: "type", widget: "select", options: ["regular", "featured"], required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "home"
+        label: "Home Page"
+        file: "src/content/pages/_index.md"
+        fields:
+          - label: "Banner"
+            name: "banner"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Content", name: "content", widget: "markdown" }
+              - label: "Button"
+                name: "button"
+                widget: "object"
+                fields:
+                  - { label: "Enable", name: "enable", widget: "boolean" }
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Link", name: "link", widget: "string" }
+          - label: "Feature"
+            name: "feature"
+            widget: "object"
+            fields:
+              - { label: "Enable", name: "enable", widget: "boolean" }
+              - { label: "Title", name: "title", widget: "string" }
+              - label: "Feature Items"
+                name: "feature_item"
+                widget: "list"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Icon", name: "icon", widget: "string" }
+                  - { label: "Content", name: "content", widget: "text" }
+          - label: "Service"
+            name: "service"
+            widget: "object"
+            fields:
+              - { label: "Enable", name: "enable", widget: "boolean" }
+              - label: "Service Items"
+                name: "service_item"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Images", name: "images", widget: "list", field: { widget: "image" } }
+                  - { label: "Content", name: "content", widget: "text" }
+                  - label: "Button"
+                    name: "button"
+                    widget: "object"
+                    fields:
+                      - { label: "Enable", name: "enable", widget: "boolean" }
+                      - { label: "Label", name: "label", widget: "string" }
+                      - { label: "Link", name: "link", widget: "string" }
+          - label: "Screenshot"
+            name: "screenshot"
+            widget: "object"
+            fields:
+              - { label: "Enable", name: "enable", widget: "boolean" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+          - label: "Call To Action"
+            name: "call_to_action"
+            widget: "object"
+            fields:
+              - { label: "Enable", name: "enable", widget: "boolean" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Content", name: "content", widget: "text" }
+              - label: "Button"
+                name: "button"
+                widget: "object"
+                fields:
+                  - { label: "Enable", name: "enable", widget: "boolean" }
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Link", name: "link", widget: "string" }
+
+      - name: "contact"
+        label: "Contact Page"
+        file: "src/content/pages/contact/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+          - { label: "Description", name: "description", widget: "text", required: false }
+          - { label: "Draft", name: "draft", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - name: "faq"
+        label: "FAQ Page"
+        file: "src/content/pages/faq/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Draft", name: "draft", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - name: "pricing"
+        label: "Pricing Page"
+        file: "src/content/pages/pricing/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Draft", name: "draft", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - name: "privacy-policy"
+        label: "Privacy Policy Page"
+        file: "src/content/pages/privacy-policy/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Draft", name: "draft", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - name: "services"
+        label: "Services Page"
+        file: "src/content/pages/services/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Draft", name: "draft", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - name: "terms-conditions"
+        label: "Terms & Conditions Page"
+        file: "src/content/pages/terms-conditions/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Draft", name: "draft", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
